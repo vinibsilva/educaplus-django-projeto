@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaPlus</title>
+    {% load static %}
+    <link rel="icon" href="{%static 'favicon.ico'%}" type="image/x-icon">
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'login.css'%}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+        .equipe {        
+        font-family: "Source Code Pro";
+        letter-spacing: 0px;
+
+        }
+
+        .input {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        #profissao {
+            font-weight: 550;
+        }
+
+        #esqueceu-senha {
+            margin-top: 20px;
+            
+        }
+
+        #tem-conta {
+            margin-top: -5px;
+        }
+
+        .sessao {
+            font-size: 13px;
+            margin-top: 3px;
+            margin-bottom: 24px; 
+            letter-spacing: 0.5px;        
+        }
+        #login-box {
+            margin: auto;
+        }
+
+        div {
+            height: 547px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="login-box">
+                {% load static %}
+                <img src="{% static 'logo_completa.educaplus.png'%}" alt="logo-educa-plus">
+                <p class="sessao">Entre para iniciar sua sessão</p>
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <select class="input" id="profissao" name="opcoes">
+                        <option value="opcao1">Estudante</option>
+                        <option value="opcao2">Professor</option>
+                    </select>
+                    <input type="email" class="input" id="text" name="email" placeholder="E-mail">
+                    <input type="password" class="input" id="text" name="senha" placeholder="Senha">
+                    <button type="submit" class="sessao" id="entrar">Entrar</button>
+                </form>
+                <p id="esqueceu-senha"><a href="" id="esqueceu">Esqueceu a senha?</a></p>
+                <p id="tem-conta">Não tem uma conta? <a href="{% url 'cadastro' %}" id="cadastro">Cadastre-se</a></p>
+            
+            </div>
+    </div>
+    <footer>
+        <a id="f1" href="">EducaPlus, Inc.</a>
+        <a id="f2" href="">Termos</a>
+        <a id="f3" href="">Privacidade</a>
+        <a id="f4" href="">Documentacao</a>
+        <a id="f5" href="">Gerenciar cookies</a>
+        <a id="f6" href="">Contato para empresas</a>
+    </footer>
+    
+</body>
+</html>

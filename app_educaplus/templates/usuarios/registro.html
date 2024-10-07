@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se • EducaPlus</title>
+    {% load static %}
+    <link rel="icon" href="{%static 'favicon.ico'%}" type="image/x-icon">
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'cadastro.css'%}">
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+        header > a > svg {
+            margin-left:10px;
+            margin-top: 6.5px;
+        }
+
+
+        header > img {
+            margin-left: 18%;
+            margin-right: 46%;
+        }
+
+        header > p {
+            color: #8193B2;
+            font-size: 17px;
+        }
+
+        header > p > a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        header {
+            height: 90px;
+            display: flex;
+            align-items: center
+        }
+
+        div {
+            height: 375px;
+            width: 355px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+        .equipe {        
+        font-family: "Source Code Pro";
+        letter-spacing: 0px;
+
+        }
+
+        .input {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        #profissao {
+            font-weight: 550;
+        }
+
+        #esqueceu-senha {
+            margin-top: 20px;
+            
+        }
+
+        #tem-conta {
+            margin-top: -5px;
+            font-size: 1px;
+        }
+
+        .sessao {
+            
+            font-size: 13px;
+            margin-top: 3px;
+            margin-bottom: 24px; 
+            letter-spacing: 0.5px;      
+              
+        }
+
+        #registro-box {
+            margin: auto;
+        }
+
+        .insira {
+            color: #0068AD;
+            font-weight: 600;
+            text-align: start;
+            margin-top: 35px;
+            margin-left: 40px;
+            margin-bottom: 0px;
+            font-weight: 700;
+        }
+
+        .input {
+            margin: 0px;
+        }
+
+        #criar {
+            margin-top: 20px;
+        }
+
+        #registro-box > p {
+            font-size: 16px;
+        }
+
+        #registro-box > #tem-conta {
+            font-size: 12px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        #registro-box .cadastro {
+            font-size: 12px;
+        }
+
+        #registro-box .sessao {
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+
+        #bem-vindo {
+            padding-top: 20px;
+        }
+
+        .insira {
+            font-size: 15px;
+            margin-top: 15px;
+        }
+
+        .entre {
+            font-weight: 600;
+        }
+
+        .icon {
+        fill: #e6e9ff; /* Cor do ícone */
+        }
+
+        .icon path {
+        stroke: #e6e9ff; /* Cor da borda do ícone */
+        }
+
+        #entre-id {
+            color: #e6e9ff;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        {% load static %}
+        <img src="{% static 'logo_completa.educaplus.png'%}" alt="logo-educa-plus">
+        <p class="entre">Ja tem uma conta ? <a id="entre-id" class="entre" href="{% url 'login'%}">Entre</a></p>
+        <a href="login.html"><svg href="login.html" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.5" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg></a>
+    </header>
+    <div>
+        <div id="registro-box">
+        <p id="bem-vindo" class="sessa">Bem vindo ao EducaPlus!<br>
+            Vamos comecar sua aventura</p>
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="{% url 'cadastrar'%}" method="post">
+            {% csrf_token %}
+            <p class="insira">Insira seu email *</p>
+            <input type="email" class="input" id="text" name="email" placeholder="E-mail">
+            <p class="insira">Insira seu nome *</p>
+            <input type="text" class="input" id="text" name="nome" placeholder="Nome">
+            <p id="criar" class="insira">Criar uma senha *</p>
+            <input type="password" class="input" id="text" name="senha" placeholder="Senha">
+            <button type="submit" class="sessao" id="entrar">Continuar</button>
+        </form>      
+        <p id="tem-conta">Ao clicar em "Continuar", declaro que aceito as <a href="#" class="cadastro" id="cadastro">Políticas de Privacidade</a> e os <a href="#" class="cadastro" id="cadastro">Termos de Uso</a> do EducaPlus.</p>
+        </div>
+    </div>
+    <footer>
+        <a id="f1" href="">EducaPlus, Inc.</a>
+        <a id="f2" href="">Termos</a>
+        <a id="f3" href="">Privacidade</a>
+        <a id="f4" href="">Documentacao</a>
+        <a id="f5" href="">Gerenciar cookies</a>
+        <a id="f6" href="">Contato para empresas</a>
+    </footer>
+</body>
+</html>
